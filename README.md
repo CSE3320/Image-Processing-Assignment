@@ -1,1 +1,1 @@
-# Image-Processing-Assignment
+# Image Processing Assignment
