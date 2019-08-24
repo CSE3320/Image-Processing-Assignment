@@ -79,7 +79,8 @@ int main( int argc, char * argv[] )
   if( data == NULL )
   {
     char * error = ( char * ) malloc ( MESSAGE_LENGTH * sizeof( char ) );
-   
+  
+    memset( error, 0, MESSAGE_LENGTH ); 
     sprintf( error, "Error opening file %s: ", input_filename ); 
     perror( error );
 
@@ -94,6 +95,7 @@ int main( int argc, char * argv[] )
   {
     char * error = ( char * ) malloc ( MESSAGE_LENGTH * sizeof( char ) );
    
+    memset( error, 0, MESSAGE_LENGTH ); 
     sprintf( error, "Could not allocate %d bytes: ", x_res * y_res * num_components * sizeof( uint64_t ) ); 
     perror( error );
 
@@ -102,15 +104,11 @@ int main( int argc, char * argv[] )
     exit( 1 );
   }
 
-  printf( "x: %d y: %d n: %d\n", x_res, y_res, num_components );
-
-
   int index = 0;
 
   for( index = 0; index < x_res * y_res * num_components; index++ )
   {
-      // Copy the red component
-      working_values[ index ] = data[ index ];
+    working_values[ index ] = data[ index ];
   }
 
   stbi_write_jpg( "test.jpg", x_res, y_res, num_components, working_values, 100 );
